@@ -51,7 +51,8 @@ KEY: [
   ICON_URI,
   URL,
   NO_RESULTS_MATCHER,   (optional)
-  NOT_LOGGED_IN_MATCHER (optional)
+  NOT_LOGGED_IN_MATCHER, (optional)
+  IMDB_TYPES (optional)
 ]
 ```
 
@@ -72,6 +73,7 @@ The key is written lower-case, should not contain spaces or other special charac
 | `URL`                   | Search URL                 | String             |
 | `NO_RESULTS_MATCHER`    | blubb                      | String or Function |
 | `NOT_LOGGED_IN_MATCHER` | blubb                      | String or Function |
+| `IMDB_TYPES`            | blubb                      | String Array       |
 
 ##### `TITLE`
 
@@ -185,3 +187,18 @@ Example: `Not logged in!`
 `function($dom, response)` that returns `true` which means "logged in" or `false` which means ![Lock](http://www.famfamfam.com/lab/icons/silk/icons/lock.png) (not logged in).
 
 **Pro tip:** Some pages will just redirect you to the login page. You can detect this by passing `detectRefreshRedirect`.
+
+##### `IMDB_TYPES`
+Some sites only make sense for specific types of entries (e.g. GraphTv is only for TV shows).
+
+Only display site link on pages of selected types.
+
+Available types are:
+MOVIE: [movie page example](https://www.imdb.com/title/tt0096453)
+TV_SHOW: [tv show page example](https://www.imdb.com/title/tt5180504)
+TV_EPISODE: [tv episode page example](https://www.imdb.com/title/tt8628988)
+GAME: [game page example](https://www.imdb.com/title/tt1135081)
+
+Example: [TV_SHOW, TV_EPISODE, GAME, MOVIE]
+
+Leave this value out, set it to `null` or provide an empty array to display site link on all types of pages.

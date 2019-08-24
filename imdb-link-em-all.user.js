@@ -45,6 +45,11 @@ const DEFAULT_CONFIG = {
   open_blank: true,
   fetch_results: true
 };
+// imdb types
+const TV_SHOW = "video.tv_show";
+const TV_EPISODE = "video.episode";
+const MOVIE = "video.movie";
+const GAME = "game";
 
 /*******************************************************************************
  * Variables
@@ -64,12 +69,6 @@ let first_run = false;
 
 // script configuration
 let config;
-
-// imdb types
-const TV_SHOW = "video.tv_show";
-const TV_EPISODE = "video.episode";
-const MOVIE = "video.movie";
-const GAME = "game";
 
 // ADDING-SITES.md describes how this works
 const sites = [
