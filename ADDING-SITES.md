@@ -193,11 +193,11 @@ Some sites only make sense for specific types of entries (e.g. GraphTv is only f
 
 Only display site link on pages of selected types.
 
-Available types are:
-MOVIE: [movie page example](https://www.imdb.com/title/tt0096453)
-TV_SHOW: [tv show page example](https://www.imdb.com/title/tt5180504)
-TV_EPISODE: [tv episode page example](https://www.imdb.com/title/tt8628988)
-GAME: [game page example](https://www.imdb.com/title/tt1135081)
+Available types are:  
+MOVIE: [movie page example](https://www.imdb.com/title/tt0096453)  
+TV_SHOW: [tv show page example](https://www.imdb.com/title/tt5180504)  
+TV_EPISODE: [tv episode page example](https://www.imdb.com/title/tt8628988)  
+GAME: [game page example](https://www.imdb.com/title/tt1135081)  
 
 Example: [TV_SHOW, TV_EPISODE, GAME, MOVIE]
 
