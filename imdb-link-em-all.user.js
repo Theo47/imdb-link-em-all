@@ -51,7 +51,7 @@ const DEFAULT_CONFIG = {
  ******************************************************************************/
 
 // movie details
-let imdb_id, imdb_title, imdb_year;
+let imdb_id, imdb_title, imdb_year, imdb_type;
 
 // new or legacy layout
 let layout;
@@ -64,6 +64,12 @@ let first_run = false;
 
 // script configuration
 let config;
+
+// imdb types
+const TV_SHOW = "video.tv_show";
+const TV_EPISODE = "video.episode";
+const MOVIE = "video.movie";
+const GAME = "game";
 
 // ADDING-SITES.md describes how this works
 const sites = [
@@ -300,7 +306,11 @@ const sites = [
     graphtvmatsf: [
       'GraphTv',
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAAAAADFHGIkAAAAb0lEQVQoz2P4jwMwkC2xMuo3iPoTvwhV4r0QQ9QfoHgUg9B7VB1nBBnCfv+JYeA/jm7HCX6GqCgG/hNIdmyRZkADMlvBEjIMGEAWLMGA6mQGn4/eDFglvD96YZcAAVobRQsJnEGyFUNGdhslcY4BAIIYn8HozFUsAAAAAElFTkSuQmCC',
-      'https://graph.matsf.cloud/tt{{IMDB_ID}}'
+      'https://graph.matsf.cloud/tt{{IMDB_ID}}',
+      null,
+      null,
+      [TV_SHOW, TV_EPISODE]
+
     ],
     kereses: [
       'Keresés',
@@ -478,7 +488,9 @@ const sites = [
       'YTS',
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAMFBMVEUgHiEbICIeIB0dKh8bMxwaQRwWUxgTYBYRbRINdA8Chw4BmgkJpgAAtgAAvwAAygD2IFtIAAAAm0lEQVQI1wGQAG//ACAEMQIiASIiACBlIRAhABACABaAEREAIhEQADoxIqtxi6IiAHkiELy03WEBALcCEG7d2SAQANYQIi3uwgEiANYgEivuQAIQANchACr7IgACAMoiICz3ECEBAJ1AIh/UIgIDAD2wIl+yABA2ABfaEDVBACSkAAGetQEiIntgAAIX38qZrMYgACACKM7ttxASm8omLNhBbCUAAAAASUVORK5CYII=',
       'https://yts.ag/browse-movies/{{IMDB_TITLE}}/all/all/0/latest',
-      '<h2>0 YIFY Movies Found</h2>'
+      '<h2>0 YIFY Movies Found</h2>',
+      null,
+      [MOVIE]
     ],
     torrentdownloads: [
       'Torrent Downloads',
@@ -1144,6 +1156,9 @@ function updateExternalLinks() {
         const site = s[key];
         const title = site[0];
         const icon = site[1];
+        if (site.length >= 6 && Object.prototype.toString.call(site[5]) === '[object Array]' && site[5].length>0 && !site[5].includes(imdb_type)) {
+              continue;
+            }
         let cls = 'lta-outlink ' + key;
         let href;
         if(Object.prototype.toString.call(site[2]) === '[object Array]' ) {
@@ -1215,6 +1230,7 @@ function parse_info() {
     else {
       imdb_year = '';
     }
+    imdb_type = document.querySelector("meta[property='og:type']").getAttribute("content");
     // fire!
     init();
     updateExternalLinks();
